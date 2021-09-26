@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import Layout from './layout/Layout';
 
 // Redux Configuration:
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
-import { Provider, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import productReducer from './store/reducers/productReducer';
 import cartReducer from './store/reducers/cartReducer';
 import orderReducer from './store/reducers/orderReducer';
 import userReducer from './store/reducers/userReducer';
+import { AppNavigation } from './navigation/AppNavagation';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
@@ -47,7 +47,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <Layout />
+      <AppNavigation />
     </Provider>
   );
 }

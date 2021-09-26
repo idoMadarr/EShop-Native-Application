@@ -22,6 +22,14 @@ const reducer = (state = initState, action) => {
         email: action.payload.email,
         isAdmin: admin,
       };
+    case 'AUTO_LOG':
+      return {
+        ...state,
+        email: action.payload.email,
+        token: action.payload.token,
+        userId: action.payload.userId,
+        isAuth: true,
+      };
     default:
       return state;
   }

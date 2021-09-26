@@ -1,5 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useSelector } from 'react-redux';
 
 // Screens:
 import LoginScreen from '../screens/LogInScreen';
@@ -11,6 +12,7 @@ import OrderScreen from '../screens/OrderScreen';
 import UserScreen from '../screens/UserScreen';
 import EditScreen from '../screens/EditScreen';
 import CreateProductScreen from '../screens/CreateProductScreen';
+import AutoStart from '../ustils/AutoStart';
 
 const ArrowStack = createNativeStackNavigator();
 
@@ -18,6 +20,7 @@ const ArrowStack = createNativeStackNavigator();
 export const AuthenticationNavigator = () => {
   return (
     <ArrowStack.Navigator screenOptions={{ headerShown: false }}>
+      <ArrowStack.Screen name={'startup'} component={AutoStart} />
       <ArrowStack.Screen name={'Login'} component={LoginScreen} />
       <ArrowStack.Screen name={'Signup'} component={SignUpScreen} />
     </ArrowStack.Navigator>
@@ -25,6 +28,7 @@ export const AuthenticationNavigator = () => {
 };
 
 export const ProductsStackNavigator = () => {
+  const email = useSelector((state) => state.userReducer.email);
   const defaultHeaderStyle = {
     headerTitleAlign: 'center',
   };
@@ -36,7 +40,10 @@ export const ProductsStackNavigator = () => {
         title: route.params?.title,
       })}
     >
-      <ArrowStack.Screen name={'Home'} component={HomeScreen} />
+      <ArrowStack.Screen
+        name={'Hello ' + email.split('@')[0] || 'Home'}
+        component={HomeScreen}
+      />
       <ArrowStack.Screen name={'Details'} component={DetailsScreen} />
       <ArrowStack.Screen
         name={'Cart'}
